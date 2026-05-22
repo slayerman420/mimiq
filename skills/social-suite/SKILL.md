@@ -1,15 +1,16 @@
 ---
 name: social-suite
 description: >
-  Master orchestrator for a complete personal social media system. Coordinates three sub-skills
-  — voice-capture (style fingerprint), content-audit (engagement analysis), and post-strategist
-  (ghostwriting + timing) — running them in the right sequence and passing outputs between them
-  intelligently. Use this skill whenever the user wants help with their social media presence,
-  personal brand, growing an audience, or creating content at scale. Triggers include: "help me
-  with my social media", "I want to grow my [platform]", "build my personal brand", "help me
-  post consistently", "I want to write better content", "set up my content system", "analyze my
-  social media", or any request that combines writing + strategy + voice. This is the entry point
-  — it figures out what's already been done and what to run next.
+  Master orchestrator for Mimiq — a complete personal social media system. Coordinates
+  voice-capture, content-audit, and post-strategist in the right sequence. THIS IS THE ENTRY
+  POINT for any broad social media request. ALWAYS trigger on: "help me with my social media",
+  "set up Mimiq", "I want to grow my LinkedIn / Twitter / Instagram", "build my personal brand",
+  "help me post consistently", "I want a content system", "I want to start posting regularly",
+  "help me get more engagement", "I want to create content at scale", "I'm trying to grow an
+  audience", "I don't know what to post", "help me show up online", or any request combining
+  writing + strategy + personal voice. Also trigger when the user seems overwhelmed and doesn't
+  know where to start. Do NOT trigger for a one-off post request when a fingerprint already
+  exists (use post-strategist) or a standalone engagement question (use content-audit).
 ---
 
 # Social Suite — Master Orchestrator

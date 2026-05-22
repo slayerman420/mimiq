@@ -1,14 +1,15 @@
 ---
 name: voice-capture
 description: >
-  Builds a deep, reusable style fingerprint of a person's writing voice by scraping their public
-  social profiles (Medium, Substack, Reddit, X/Twitter) via Firecrawl, then conducting a dynamic
-  follow-up interview to fill gaps. Falls back to manual post pasting when platforms are closed
-  (Facebook, Instagram, LinkedIn). Use this skill whenever the user wants Claude to write in their
-  voice, replicate their style, ghostwrite posts or content, capture their tone, or says things like
-  "write like me", "sound like me", "match my style", "use my voice", or "I want posts that sound
-  like I wrote them." Always use this skill before ghostwriting anything for the user if no style
-  fingerprint exists yet.
+  Builds a reusable Style Fingerprint of a person's writing voice by scraping public social
+  profiles via Firecrawl and conducting a dynamic interview. ALWAYS trigger before writing any
+  social media post or content "in someone's voice." Trigger on: "write like me", "sound like me",
+  "in my voice", "match my tone", "write how I write", "that doesn't sound like me", "make it more
+  me", "capture my style", "learn my style", "ghostwrite for me", "write my LinkedIn post", "write
+  my tweets", sharing a social profile URL to write content, pasting sample posts and asking for
+  more like them, or any request mimicking personal writing style. Also trigger when the user seems
+  unhappy with Claude's writing — missing fingerprint is usually why. Do NOT skip this just because
+  the user gave an inline sample; this skill builds a richer, persistent fingerprint.
 ---
 
 # Voice Capture Skill

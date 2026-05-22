@@ -1,14 +1,16 @@
 ---
 name: content-audit
 description: >
-  Analyzes a user's social media posts to identify their top-performing content by engagement
-  (likes, comments, shares, upvotes, claps), extract winning topic clusters and formats, and
-  determine historical best posting times. Scrapes open platforms (Medium, Substack, Reddit, X)
-  via Firecrawl for public engagement data; falls back to manual input for closed platforms
-  (Facebook, Instagram, LinkedIn). Use this skill whenever the user wants to know what content
-  works best for them, asks about "best posts", "top performing content", "what should I post
-  about", "when should I post", "what topics get the most engagement", or wants data-driven
-  content strategy. Always run this before post-strategist if no audit exists yet.
+  Analyzes a user's social media posts to surface top-performing content, winning topics, best
+  formats, and optimal posting times — using Firecrawl for public engagement data, falling back
+  to manual input for closed platforms. ALWAYS trigger on: "what's been working for me", "what
+  should I post about", "what are my best posts", "what topics get engagement", "when should I
+  post", "analyze my content", "audit my social media", "what kind of posts do well for me",
+  "I want to double down on what works", "show me my top performing content", "what do my
+  followers respond to", sharing a social profile URL and asking what's working, or any question
+  about past post performance or building a data-driven content calendar. Do NOT trigger for
+  generic social media best practices with no reference to the user's own content — that's web
+  search, not an audit.
 ---
 
 # Content Audit Skill

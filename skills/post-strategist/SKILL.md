@@ -1,15 +1,16 @@
 ---
 name: post-strategist
 description: >
-  Ghostwrites full social media posts in the user's exact voice and recommends optimal posting
-  times, using the user's style fingerprint (from voice-capture) and content audit (from
-  content-audit). Offers two timing modes: personal best times (based on the user's own
-  historical data) and research-backed best times (platform-wide data). Use this skill whenever
-  the user wants to create posts, write content for social media, asks "write a post for me",
-  "draft something for LinkedIn/X/Instagram", "what should I post today", "write this in my
-  voice", "create content for [platform]", or wants a posting schedule. If no style fingerprint
-  exists, trigger voice-capture first. If no content audit exists, offer to run content-audit
-  first or proceed without it.
+  Ghostwrites complete, ready-to-publish social media posts in the user's exact voice with
+  optimal timing recommendations. ALWAYS trigger for any request to write or draft a social post
+  on any platform. Trigger on: "write me a post", "draft a LinkedIn post", "write a tweet",
+  "write my Instagram caption", "I need to post about X", "help me write content", "create a post
+  about my launch / job / article", "write a week of posts", "I have an idea — write it up",
+  "when should I post this", "what's the best time to post today", "write this in my voice",
+  "turn this into a post", or any request ending in publishable social content. Check for a Style
+  Fingerprint first — if none exists, run voice-capture before writing. Always offer both personal
+  timing data and platform-research timing. Do NOT trigger for content performance analysis
+  (content-audit) or style-capture with no writing request (voice-capture).
 ---
 
 # Post Strategist Skill
