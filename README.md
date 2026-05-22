@@ -60,16 +60,16 @@ your personal historical best times, and platform research-backed best times.
 
 ## Installation
 
-### One-Command Install (Claude Code + Chat + Cowork)
+### Claude Code (CLI) — One-Command Install
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/slayerman420/mimiq/main/install.sh | bash
 ```
 
-This installs all four skills globally to `~/.claude/skills/` — making them available in
-Claude Code, Claude.ai Chat, and Cowork automatically.
+This installs all four skills to `~/.claude/skills/` and makes them available in every
+Claude Code session.
 
-### Manual Install
+Or manually:
 
 ```bash
 git clone https://github.com/slayerman420/mimiq.git
@@ -77,11 +77,25 @@ cd mimiq
 ./install.sh
 ```
 
-### Claude.ai Chat / Cowork (no terminal)
+---
 
-1. Download the `.skill` files from the [`dist/`](dist/) folder
-2. Go to **Settings → Skills → Personal Skills → +**
-3. Upload each `.skill` file
+### Claude.ai Chat / Cowork — Manual Upload Required
+
+> ⚠️ **There is no auto-installer for Chat or Cowork.** These are cloud-based and can't read
+> from your computer's filesystem, so skills must be uploaded manually through the UI.
+> This is a Claude platform limitation, not specific to Mimiq.
+
+1. Download all four `.skill` files from the [`dist/`](dist/) folder:
+   - [social-suite.skill](dist/social-suite.skill)
+   - [voice-capture.skill](dist/voice-capture.skill)
+   - [content-audit.skill](dist/content-audit.skill)
+   - [post-strategist.skill](dist/post-strategist.skill)
+2. Open Claude → **Settings → Skills → Personal Skills**
+3. Click **+** and upload each `.skill` file one by one
+4. All four should appear under Personal Skills with the toggle turned on
+
+> 💡 If you're a Claude Code user too, the CLI install above is completely separate — you'll
+> need to do both if you want Mimiq everywhere.
 
 ---
 
