@@ -64,14 +64,12 @@ research-backed best times.
 
 ## Installation
 
-### Claude.ai (Web / Mobile / Desktop)
-
-This is the recommended way to install Mimiq.
+### Claude.ai Chat / Cowork (Web, Mobile, Desktop)
 
 1. Download all four `.skill` files from the [`dist/`](dist/) folder
-2. Open [Claude.ai](https://claude.ai) → Settings → Skills
-3. Drag and drop each `.skill` file to install
-4. All four skills must be installed for the full system to work
+2. Go to **Settings → Skills → Personal Skills**
+3. Click the **+** button and upload each `.skill` file one by one
+4. All four must be installed — skills work together as a system
 
 Install individually if you only need specific functionality:
 - [`dist/social-suite.skill`](dist/social-suite.skill) — orchestrator (install this first)
@@ -79,29 +77,19 @@ Install individually if you only need specific functionality:
 - [`dist/content-audit.skill`](dist/content-audit.skill) — engagement analysis
 - [`dist/post-strategist.skill`](dist/post-strategist.skill) — ghostwriting + timing
 
+Once installed, skills trigger automatically when you describe what you want, or via `/skill-name`.
+
 ---
 
 ### Claude Code (CLI)
 
-Skills in Claude Code live inside your **project directory** under `.claude/skills/`.
-
-**Option A — Clone the full repo into your project**
-
-```bash
-# From your project root
-git clone https://github.com/slayerman420/mimiq.git .claude/skills/mimiq
-```
-
-**Option B — Copy only the SKILL.md files you need**
+Skills must be installed at `.claude/skills/<skill-name>/SKILL.md` inside your project directory.
+The correct way to install all four at once:
 
 ```bash
-# Create the skills directory in your project
-mkdir -p .claude/skills/social-suite
-mkdir -p .claude/skills/voice-capture
-mkdir -p .claude/skills/content-audit
-mkdir -p .claude/skills/post-strategist
+# From your project root — installs each skill at the correct path
+mkdir -p .claude/skills/social-suite .claude/skills/voice-capture .claude/skills/content-audit .claude/skills/post-strategist
 
-# Copy each skill
 curl -o .claude/skills/social-suite/SKILL.md \
   https://raw.githubusercontent.com/slayerman420/mimiq/main/skills/social-suite/SKILL.md
 
@@ -115,17 +103,17 @@ curl -o .claude/skills/post-strategist/SKILL.md \
   https://raw.githubusercontent.com/slayerman420/mimiq/main/skills/post-strategist/SKILL.md
 ```
 
-**Option C — Team/shared project install**
+> ⚠️ **Do NOT use `git clone` directly into `.claude/skills/mimiq`** — this nests the files one
+> level too deep and Claude Code won't find them. Use the curl commands above instead.
 
-Commit the `.claude/skills/` directory to your repo so every team member gets Mimiq automatically when they clone the project.
-
+Verify the install worked:
 ```bash
-git add .claude/skills/
-git commit -m "Add Mimiq skills"
+ls .claude/skills/
+# Should show: social-suite  voice-capture  content-audit  post-strategist
 ```
 
-> **Note:** Skills in Claude Code are project-scoped, not global. You need to install them
-> inside each project where you want to use them.
+Then open Claude Code from the same directory and type `/voice-capture`, `/content-audit`,
+`/post-strategist`, or `/social-suite` to trigger any skill directly.
 
 ---
 
@@ -136,7 +124,7 @@ git commit -m "Add Mimiq skills"
 Say any of the following to Claude:
 
 > "Help me set up my social media system"
-> "I want to build my personal brand on LinkedIn"
+> "I want to grow my LinkedIn"
 > "Set up Mimiq from scratch"
 
 `social-suite` will guide you through the full flow automatically.
@@ -160,12 +148,12 @@ mimiq/
 ├── README.md
 ├── LICENSE
 ├── CHANGELOG.md
-├── skills/                        # Source SKILL.md files (human-readable)
-│   ├── social-suite/SKILL.md      # Master orchestrator
-│   ├── voice-capture/SKILL.md     # Style fingerprinting
-│   ├── content-audit/SKILL.md     # Engagement analysis
-│   └── post-strategist/SKILL.md   # Ghostwriting + timing
-└── dist/                          # Packaged .skill files for Claude.ai
+├── skills/                        # Source SKILL.md files
+│   ├── social-suite/SKILL.md
+│   ├── voice-capture/SKILL.md
+│   ├── content-audit/SKILL.md
+│   └── post-strategist/SKILL.md
+└── dist/                          # Packaged .skill files for Claude.ai upload
     ├── social-suite.skill
     ├── voice-capture.skill
     ├── content-audit.skill
