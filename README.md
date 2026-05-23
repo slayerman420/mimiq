@@ -15,6 +15,7 @@ Built by [@slayerman420](https://github.com/slayerman420)
 | `voice-capture` | Scrapes your profiles + interviews you to build a Style Fingerprint |
 | `content-audit` | Finds your top-performing topics, formats, and best posting times |
 | `post-strategist` | Ghostwrites full posts in your voice + recommends when to publish |
+| `mimiq-memory` | Persistent memory, feedback system, multi-profile identity, community insights |
 
 ---
 
@@ -22,6 +23,8 @@ Built by [@slayerman420](https://github.com/slayerman420)
 
 ```
 You → /social-suite → voice-capture → content-audit → post-strategist → ready to publish
+                            ↓                ↓                ↓
+                       mimiq-memory ←————————————————————————— saves everything
 ```
 
 **voice-capture** scrapes your public profiles (Medium, Substack, Reddit, X) via Firecrawl,
@@ -33,6 +36,12 @@ best times to publish. Manual input fallback for closed platforms.
 
 **post-strategist** ghostwrites complete posts using your fingerprint. Offers two timing modes:
 your personal historical best times, and platform research-backed best times.
+
+**mimiq-memory** runs at the start and end of every session. Stores all scrapes, fingerprints,
+audits, and ghostwritten posts in a local database at `~/.claude/mimiq-memory/`. Links multiple
+social handles to one identity. Lets you rate every post (perfect / close / off), correct audits,
+and give feedback that improves your fingerprint over time. Includes an opt-in community insights
+layer that surfaces anonymized patterns from other Mimiq users.
 
 ---
 
@@ -150,12 +159,17 @@ mimiq/
 │   ├── social-suite/SKILL.md
 │   ├── voice-capture/SKILL.md
 │   ├── content-audit/SKILL.md
-│   └── post-strategist/SKILL.md
+│   ├── post-strategist/SKILL.md
+│   └── mimiq-memory/
+│       ├── SKILL.md
+│       ├── references/schema.md
+│       └── scripts/               # 13 Python scripts for memory, feedback, queries
 └── dist/                          # Packaged .skill files for Claude.ai upload
     ├── social-suite.skill
     ├── voice-capture.skill
     ├── content-audit.skill
-    └── post-strategist.skill
+    ├── post-strategist.skill
+    └── mimiq-memory.skill
 ```
 
 ---
