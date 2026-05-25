@@ -53,7 +53,7 @@ layer that surfaces anonymized patterns from other Mimiq users.
 | Reddit     | ✅ Apify (`trudax/reddit-scraper`)| ✅ Apify (`trudax/reddit-scraper`)|
 | Instagram  | ✅ Apify (`apify/instagram-scraper`) | ✅ Apify (`apify/instagram-scraper`) |
 | Facebook   | ✅ Apify (`apify/facebook-posts-scraper`) | ✅ Apify (`apify/facebook-posts-scraper`) |
-| LinkedIn   | ⚠️ Apify (`apimaestro/linkedin-profile-detail`) | ⚠️ Limited (manual fallback) |
+| LinkedIn   | ⚠️ Apify (`harvestapi/linkedin-profile-scraper`) | ⚠️ Limited (manual fallback) |
 | Medium     | ✅ Web fetch (no actor needed)   | ✅ Web fetch                     |
 | Substack   | ✅ Web fetch (no actor needed)   | ✅ Web fetch                     |
 
@@ -81,7 +81,7 @@ voice-capture or content-audit. One Apify account runs all actors — they bill 
 | Reddit     | `trudax/reddit-scraper`                | Voice capture + audit           |
 | Instagram  | `apify/instagram-scraper`              | Voice capture + audit           |
 | Facebook   | `apify/facebook-posts-scraper`         | Voice capture + audit           |
-| LinkedIn   | `apimaestro/linkedin-profile-detail`   | Voice capture + audit           |
+| LinkedIn   | `harvestapi/linkedin-profile-scraper`   | Voice capture + audit           |
 | Medium     | *(web fetch — no actor needed)*        | Voice capture + audit           |
 | Substack   | *(web fetch — no actor needed)*        | Voice capture + audit           |
 

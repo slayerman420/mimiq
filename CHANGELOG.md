@@ -22,7 +22,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | Reddit | `trudax/reddit-scraper` |
 | Instagram | `apify/instagram-scraper` |
 | Facebook | `apify/facebook-posts-scraper` |
-| LinkedIn | `apimaestro/linkedin-profile-detail` |
+| LinkedIn | `harvestapi/linkedin-profile-scraper` |
 | Medium/Substack | *(web fetch — no actor needed)* |
 
 ---

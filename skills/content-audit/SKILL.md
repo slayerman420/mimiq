@@ -31,7 +31,7 @@ Each actor bills independently — point the user to the Store links if any are 
 | Reddit     | `trudax/reddit-scraper`           | Upvotes, comments, timestamp        | [Link](https://apify.com/trudax/reddit-scraper) |
 | Instagram  | `apify/instagram-scraper`         | Likes, comments, timestamp          | [Link](https://apify.com/apify/instagram-scraper) |
 | Facebook   | `apify/facebook-posts-scraper`    | Reactions, comments, shares         | [Link](https://apify.com/apify/facebook-posts-scraper) |
-| LinkedIn   | `apimaestro/linkedin-profile-detail` | Posts, reactions (limited)       | [Link](https://apify.com/apimaestro/linkedin-profile-detail) |
+| LinkedIn   | `harvestapi/linkedin-profile-scraper` | Posts, reactions (limited)       | [Link](https://apify.com/harvestapi/linkedin-profile-scraper) |
 | Medium     | Web fetch (no actor needed)       | Claps, responses                    | — |
 | Substack   | Web fetch (no actor needed)       | Likes, comments                     | — |
 
@@ -74,7 +74,7 @@ Trigger each platform's actor in parallel where possible. For each post, extract
 - Input: public page or profile URL
 - Extract: text, reactions, comments, shares, timestamp
 
-**LinkedIn** (`apimaestro/linkedin-profile-detail`):
+**LinkedIn** (`harvestapi/linkedin-profile-scraper`):
 - Input: profile URL
 - Extract: posts, reactions (note: LinkedIn limits public engagement data)
 

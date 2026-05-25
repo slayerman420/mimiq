@@ -31,7 +31,7 @@ if any are missing.
 | Reddit     | `trudax/reddit-scraper`           | [Link](https://apify.com/trudax/reddit-scraper) |
 | Instagram  | `apify/instagram-scraper`         | [Link](https://apify.com/apify/instagram-scraper) |
 | Facebook   | `apify/facebook-posts-scraper`    | [Link](https://apify.com/apify/facebook-posts-scraper) |
-| LinkedIn   | `apimaestro/linkedin-profile-detail` | [Link](https://apify.com/apimaestro/linkedin-profile-detail) |
+| LinkedIn   | `harvestapi/linkedin-profile-scraper` | [Link](https://apify.com/harvestapi/linkedin-profile-scraper) |
 | Medium     | Web fetch (no actor needed)       | — |
 | Substack   | Web fetch (no actor needed)       | — |
 
@@ -79,7 +79,7 @@ Aim for **15–30 posts minimum** across all platforms for a reliable fingerprin
 - Input: public page or profile URL
 - Extract: post text, reactions, comments, timestamp
 
-**LinkedIn** (`apimaestro/linkedin-profile-detail`):
+**LinkedIn** (`harvestapi/linkedin-profile-scraper`):
 - Input: LinkedIn profile URL
 - Extract: posts, articles, engagement data
 
