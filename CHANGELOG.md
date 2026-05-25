@@ -5,6 +5,28 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.2.0] — 2026-05-25
+
+### Changed
+- Replaced Firecrawl and SerpAPI with **Apify** across all scraping tasks
+- `voice-capture` now uses platform-specific Apify actors for all 7 platforms
+- `content-audit` now uses Apify actors for engagement data scraping
+- Updated supported platforms table — Instagram, Facebook, X/Twitter now fully supported via Apify
+- Added required Apify actors table to README with actor IDs and Store links
+
+### Actors Required
+| Platform | Actor ID |
+|---|---|
+| X/Twitter (voice) | `apidojo/twitter-scraper-lite` |
+| X/Twitter (audit) | `apidojo/tweet-scraper` |
+| Reddit | `trudax/reddit-scraper` |
+| Instagram | `apify/instagram-scraper` |
+| Facebook | `apify/facebook-posts-scraper` |
+| LinkedIn | `apimaestro/linkedin-profile-detail` |
+| Medium/Substack | *(web fetch — no actor needed)* |
+
+---
+
 ## [1.1.0] — 2026-05-23
 
 ### Added

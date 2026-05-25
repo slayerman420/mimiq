@@ -2,163 +2,162 @@
 name: content-audit
 description: >
   Analyzes a user's social media posts to surface top-performing content, winning topics, best
-  formats, and optimal posting times — using Firecrawl for public engagement data, falling back
-  to manual input for closed platforms. ALWAYS trigger on: "what's been working for me", "what
-  should I post about", "what are my best posts", "what topics get engagement", "when should I
-  post", "analyze my content", "audit my social media", "what kind of posts do well for me",
-  "I want to double down on what works", "show me my top performing content", "what do my
-  followers respond to", sharing a social profile URL and asking what's working, or any question
-  about past post performance or building a data-driven content calendar. Do NOT trigger for
-  generic social media best practices with no reference to the user's own content — that's web
-  search, not an audit.
+  formats, and optimal posting times — using Apify actors for scraping public engagement data,
+  falling back to manual input when actors are unavailable. ALWAYS trigger on: "what's been
+  working for me", "what should I post about", "what are my best posts", "what topics get
+  engagement", "when should I post", "analyze my content", "audit my social media", "what kind
+  of posts do well for me", "I want to double down on what works", "show me my top performing
+  content", "what do my followers respond to", sharing a social profile URL and asking what's
+  working, or any question about past post performance or building a data-driven content calendar.
+  Do NOT trigger for generic social media best practices with no reference to the user's own
+  content — that's web search, not an audit.
 ---
 
 # Content Audit Skill
 
-Identify what content has worked best for the user, so future posts double down on winning 
+Identify what content has worked best for the user so future posts double down on winning
 topics, formats, and timing.
+
+---
+
+## Required Apify Actors
+
+Confirm the user has Apify connected and the following actors available before scraping.
+Each actor bills independently — point the user to the Store links if any are missing.
+
+| Platform   | Actor ID                          | Data Available                      | Apify Store |
+|------------|-----------------------------------|-------------------------------------|-------------|
+| X/Twitter  | `apidojo/tweet-scraper`           | Likes, retweets, replies, timestamp | [Link](https://apify.com/apidojo/tweet-scraper) |
+| Reddit     | `trudax/reddit-scraper`           | Upvotes, comments, timestamp        | [Link](https://apify.com/trudax/reddit-scraper) |
+| Instagram  | `apify/instagram-scraper`         | Likes, comments, timestamp          | [Link](https://apify.com/apify/instagram-scraper) |
+| Facebook   | `apify/facebook-posts-scraper`    | Reactions, comments, shares         | [Link](https://apify.com/apify/facebook-posts-scraper) |
+| LinkedIn   | `apimaestro/linkedin-profile-detail` | Posts, reactions (limited)       | [Link](https://apify.com/apimaestro/linkedin-profile-detail) |
+| Medium     | Web fetch (no actor needed)       | Claps, responses                    | — |
+| Substack   | Web fetch (no actor needed)       | Likes, comments                     | — |
+
+> Medium and Substack are publicly accessible — use `web_fetch` on the archive URL directly.
 
 ---
 
 ## Step 1 — Identify Platforms to Audit
 
-Ask which platforms to audit. Note the data availability per platform:
-
-| Platform   | Engagement Data Available?         | Method              |
-|------------|------------------------------------|---------------------|
-| Reddit     | ✅ Upvotes, comments (public)      | Firecrawl           |
-| Medium     | ✅ Claps, responses (public)       | Firecrawl           |
-| Substack   | ✅ Likes, comments (public)        | Firecrawl           |
-| X/Twitter  | ⚠️ Likes/reposts (partial/public) | Firecrawl           |
-| LinkedIn   | ❌ Reactions hidden behind login   | Manual input        |
-| Facebook   | ❌ Behind login                    | Manual input        |
-| Instagram  | ❌ Behind login                    | Manual input        |
+Ask which platforms to audit and collect handles for each.
 
 ---
 
-## Step 2 — Scrape Open Platforms
+## Step 2 — Scrape Engagement Data via Apify
 
-Use Firecrawl to scrape the user's profile pages on open platforms.
+Trigger each platform's actor in parallel where possible. For each post, extract:
+- Post text (title or first line as identifier)
+- Engagement numbers: likes / upvotes / claps / comments / shares / retweets
+- Date and time posted
+- Post format: long-form / short take / list / question / story / thread
 
-**For each post, extract:**
-- Post title or first line (as identifier)
-- Full or truncated body text
-- Engagement numbers: upvotes/likes/claps/comments/shares/reposts
-- Date posted (if visible)
-- Post format: long-form essay / short take / list / question / story / thread
+**Minimum target:** 20–30 posts per platform.
 
-**Scraping targets:**
-- Reddit: `https://www.reddit.com/user/{username}/submitted/?sort=top`
-- Medium: `https://medium.com/@{username}` (look for clap counts)
-- Substack: Author's archive page
-- X/Twitter: `https://twitter.com/{username}` (public profile)
+### Scraping targets per platform:
 
-Attempt to collect **at least 20–30 posts** per platform where possible.
-If Firecrawl is blocked or returns empty results, skip and move to manual input for that platform.
+**X/Twitter** (`apidojo/tweet-scraper`):
+- Input: user profile URL `https://x.com/{username}`
+- Sort by: most liked / most retweeted
+- Extract: text, likes, retweets, replies, timestamp
+
+**Reddit** (`trudax/reddit-scraper`):
+- Input: `https://www.reddit.com/user/{username}/submitted/?sort=top`
+- Extract: title, body, upvotes, comments, subreddit, timestamp
+
+**Instagram** (`apify/instagram-scraper`):
+- Input: username or profile URL
+- Extract: caption, likes, comments, timestamp
+
+**Facebook** (`apify/facebook-posts-scraper`):
+- Input: public page or profile URL
+- Extract: text, reactions, comments, shares, timestamp
+
+**LinkedIn** (`apimaestro/linkedin-profile-detail`):
+- Input: profile URL
+- Extract: posts, reactions (note: LinkedIn limits public engagement data)
+
+**Medium** (web_fetch):
+- URL: `https://medium.com/@{username}`
+- Extract: article titles, clap counts, response counts
+
+**Substack** (web_fetch):
+- URL: author archive URL
+- Extract: post titles, like counts, comment counts
+
+If any actor fails or returns empty, skip and move to manual input for that platform.
 
 ---
 
-## Step 3 — Manual Input for Closed Platforms
+## Step 3 — Manual Input for Failed / Closed Platforms
 
-For LinkedIn, Facebook, Instagram (or any failed scrape), ask:
+For any platform where scraping failed:
 
-> "For [platform], could you share your top 5–10 posts that got the most engagement?
-> Just paste the post text and tell me roughly how many likes/comments/shares each got.
-> Even ballpark numbers are fine — 'a lot', 'a little', '200 likes' all work."
-
-Accept whatever level of detail they provide.
+> "For [platform], could you share your top 5–10 posts with the most engagement?
+> Paste the post text and give me rough numbers — even ballpark figures work."
 
 ---
 
 ## Step 4 — Rank and Cluster Posts
 
-Once data is collected, sort all posts by engagement score (normalize across platforms if needed).
+Sort all posts by engagement. Identify the **Top 10 Posts** overall, noting:
+- Platform, topic, format, engagement numbers, date + day + time
 
-**Identify the Top 10 Posts overall**, noting:
-- Platform
-- Topic / subject matter
-- Format (list, story, hot take, question, etc.)
-- Engagement numbers
-- Date + day of week + approximate time (if available)
-
-Then cluster posts into **Topic Buckets** — groups of posts that share a theme:
-
-Example clusters:
-- "Career advice / lessons learned"
-- "Industry commentary / hot takes"
-- "Personal stories / vulnerability"
-- "How-to / tactical tips"
-- "Humor / observations"
-
-For each cluster, calculate:
-- Number of posts in cluster
-- Average engagement per post in cluster
-- Highest single post engagement in cluster
+Then cluster into **Topic Buckets**:
+- Group posts by theme (e.g., "career advice", "industry hot takes", "personal stories")
+- For each cluster: post count, average engagement, highest single post engagement
 
 ---
 
 ## Step 5 — Timing Analysis
 
-From posts where date/time is available:
-
+From posts with timestamps:
 - **Best days of week** (rank Mon–Sun by average engagement)
-- **Best time of day** (if timestamp data is available — group into morning / midday / evening / night)
-- **Posting frequency patterns** (did consistent posting weeks outperform sporadic ones?)
-
-If timestamps are unavailable, note this and defer to platform research in post-strategist.
+- **Best time of day** (morning / midday / evening / night)
+- **Posting frequency patterns** (consistent weeks vs sporadic)
 
 ---
 
 ## Step 6 — Generate the Audit Report
 
-Output a structured **Content Audit Report**:
-
 ```
 ## [Name]'s Content Audit Report
-Generated: [date]
 Platforms audited: [list]
 Total posts analyzed: [n]
 
----
-
 ### 🏆 Top 10 Posts
-1. [Platform] — "[Post snippet]" — [engagement] — [date if known]
-2. ...
-
----
+1. [Platform] — "[Post snippet]" — [engagement] — [date]
+...
 
 ### 📦 Topic Clusters (ranked by avg engagement)
-1. **[Cluster name]** — [n posts] — avg [x] engagements — best: [top post snippet]
-2. ...
-
----
+1. [Cluster name] — [n posts] — avg [x] engagements
+...
 
 ### 📅 Best Times to Post (from your data)
 - Best days: [e.g., Tuesday, Thursday]
 - Best times: [e.g., 8–10am, 6–8pm]
-- Note: [any caveats about data availability]
 
----
-
-### 💡 Key Patterns Observed
-- [Insight 1: e.g., "Posts with personal stories get 3x more comments than tips"]
-- [Insight 2: e.g., "Questions outperform statements on LinkedIn"]
-- [Insight 3: e.g., "Your shortest posts (under 100 words) consistently outperform long ones on X"]
-
----
+### 💡 Key Patterns
+- [Insight 1]
+- [Insight 2]
 
 ### ⚠️ What's Not Working
-- [Topic or format that underperforms]
-- [Platform where engagement is consistently low]
+- [Underperforming topic or format]
 ```
 
 ---
 
-## Step 7 — Confirm & Hand Off
+## Step 7 — Save and Hand Off
 
-Present the report and ask:
-> "Does this match your experience? Any posts you'd add or context I should know?"
+Save via mimiq-memory:
+```bash
+python3 ~/.claude/skills/mimiq-memory/scripts/save_audit.py \
+  --platform "[platform]" \
+  --data '<audit JSON>' \
+  --best-times "[summary]" \
+  --topic-clusters "[summary]"
+```
 
-Incorporate corrections. Then note:
-> "This audit is ready for the post-strategist, which will use these patterns to help you
-> plan and write future content."
+Then ask:
+> "Does this match your experience? Anything missing?"

@@ -47,23 +47,46 @@ layer that surfaces anonymized patterns from other Mimiq users.
 
 ## Supported Platforms
 
-| Platform | Voice Capture | Engagement Data |
-|---|---|---|
-| Medium | ✅ Auto (Firecrawl) | ✅ Auto |
-| Substack | ✅ Auto (Firecrawl) | ✅ Auto |
-| Reddit | ✅ Auto (Firecrawl) | ✅ Auto |
-| X / Twitter | ⚠️ Partial | ⚠️ Partial |
-| LinkedIn | 📋 Manual paste | 📋 Manual paste |
-| Facebook | 📋 Manual paste | 📋 Manual paste |
-| Instagram | 📋 Manual paste | 📋 Manual paste |
+| Platform   | Voice Capture                    | Engagement Data                  |
+|------------|----------------------------------|----------------------------------|
+| X/Twitter  | ✅ Apify (`apidojo/twitter-scraper-lite`) | ✅ Apify (`apidojo/tweet-scraper`) |
+| Reddit     | ✅ Apify (`trudax/reddit-scraper`)| ✅ Apify (`trudax/reddit-scraper`)|
+| Instagram  | ✅ Apify (`apify/instagram-scraper`) | ✅ Apify (`apify/instagram-scraper`) |
+| Facebook   | ✅ Apify (`apify/facebook-posts-scraper`) | ✅ Apify (`apify/facebook-posts-scraper`) |
+| LinkedIn   | ⚠️ Apify (`apimaestro/linkedin-profile-detail`) | ⚠️ Limited (manual fallback) |
+| Medium     | ✅ Web fetch (no actor needed)   | ✅ Web fetch                     |
+| Substack   | ✅ Web fetch (no actor needed)   | ✅ Web fetch                     |
+
+⚠️ = Actor available but platform limits public data. Manual paste fallback applies.
 
 ---
 
 ## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) **or** Claude.ai (Pro)
-- [Firecrawl MCP](https://firecrawl.dev) — for automatic profile scraping (optional but recommended)
-- [SerpAPI MCP](https://serpapi.com) — for supplementary search (optional)
+- [Apify MCP](https://apify.com) connected to Claude — for scraping all platforms via Actors
+- An Apify account with the required Actors installed (see table below)
+
+> Mimiq works without Apify, but you will need to paste content manually for all platforms.
+
+### Required Apify Actors
+
+Each platform uses a specific Apify Actor. Install them from the Apify Store before running
+voice-capture or content-audit. One Apify account runs all actors — they bill independently.
+
+| Platform   | Actor ID                               | Used For                        |
+|------------|----------------------------------------|---------------------------------|
+| X/Twitter  | `apidojo/twitter-scraper-lite`         | Voice capture                   |
+| X/Twitter  | `apidojo/tweet-scraper`                | Engagement audit                |
+| Reddit     | `trudax/reddit-scraper`                | Voice capture + audit           |
+| Instagram  | `apify/instagram-scraper`              | Voice capture + audit           |
+| Facebook   | `apify/facebook-posts-scraper`         | Voice capture + audit           |
+| LinkedIn   | `apimaestro/linkedin-profile-detail`   | Voice capture + audit           |
+| Medium     | *(web fetch — no actor needed)*        | Voice capture + audit           |
+| Substack   | *(web fetch — no actor needed)*        | Voice capture + audit           |
+
+Browse and install actors at **[apify.com/store](https://apify.com/store)**. Search by actor ID.
+LinkedIn and Facebook public engagement data is limited — expect manual input fallback for those.
 
 ---
 
